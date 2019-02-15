@@ -1,0 +1,4 @@
+modules = {
+    ["lucy"] = "src/lucy.lua",
+    ["lucy.*"] = "src/"
+}

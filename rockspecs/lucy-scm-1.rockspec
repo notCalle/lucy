@@ -23,6 +23,7 @@ build = {
         ["lucy.list"] = "src/lucy/list.lua",
         ["lucy.mixin"] = "src/lucy/mixin.lua",
         ["lucy.object"] = "src/lucy/object.lua",
+        ["lucy.queue"] = "src/lucy/queue.lua",
         ["lucy.singleton"] = "src/lucy/singleton.lua"
     }
 }

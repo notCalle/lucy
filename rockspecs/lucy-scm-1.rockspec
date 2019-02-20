@@ -20,6 +20,7 @@ build = {
     modules = {
         lucy = "src/lucy.lua",
         ["lucy.class"] = "src/lucy/class.lua",
+        ["lucy.list"] = "src/lucy/list.lua",
         ["lucy.mixin"] = "src/lucy/mixin.lua",
         ["lucy.object"] = "src/lucy/object.lua",
         ["lucy.singleton"] = "src/lucy/singleton.lua"

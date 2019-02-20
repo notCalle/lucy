@@ -25,6 +25,7 @@ build = {
         ["lucy.mixin"] = "src/lucy/mixin.lua",
         ["lucy.object"] = "src/lucy/object.lua",
         ["lucy.queue"] = "src/lucy/queue.lua",
+        ["lucy.set"] = "src/lucy/set.lua",
         ["lucy.singleton"] = "src/lucy/singleton.lua"
     }
 }

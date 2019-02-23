@@ -16,7 +16,7 @@ describe("a lucy Object", function()
     it("requires a subclass name or instance table when called",
     function()
         assert.has.error(function() Object() end,
-            "Argument must be a subclass name or instance table")
+            "Invalid argument type, nil")
     end)
 
     it("gives a string representation to instances",

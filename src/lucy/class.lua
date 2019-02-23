@@ -3,44 +3,52 @@
 -- @usage
 -- Class = require'lucy.class'
 -- SubClass = Class'SubClass'
--- @see Mixin
--- @see Object
-local getmetatable = getmetatable
-local subclass = require'lucy'.subclass
-local M = subclass(nil,"Class")
+local print = print
+local getmetatable,setmetatable = getmetatable,setmetatable
+local error,type,pairs = error,type,pairs
+local strsub = string.sub
+
+local function class(super,name)
+    if type(name) ~= "string" then
+        error("Invalid argument type, "..type(name),2)
+    end
+    -- These metamethods are private to each class
+    local mt = {
+        __index = super,
+        super = super,
+        __tostring = function(_) return name end
+    }
+    -- Copy all other metamethods from super class
+    for k,v in pairs(getmetatable(super) or {}) do
+        if strsub(k,1,2) == "__" and not mt[k] then mt[k] = v end
+    end
+    return setmetatable({},mt),mt
+end
+
+local M,_M = class(nil,"Class")
 _ENV=M
 
-function M:subclass(name)
-    local T,mt = subclass(self, name)
-    T.__index = T
-    T.class = T
-    return T,mt
-end
-
---- Find method in super class.
--- @tparam string method name
--- @treturn function super class implementation of 'method'
-function M:super(method)
-    local superclass = getmetatable(self).__index
-    return superclass and method and superclass[method]
-        or superclass
-end
-
---- Include methods from a mixin.
--- @function __concat
+--- Create a named subclass
 -- @usage
--- SomeClass..OneMixin..AndOneMore
--- @tparam Mixin mixin to be included in the class
--- @return self
-
---- Create a new subclass.
+-- SubClass = Class'SubClass'
 -- @function __call
--- @tparam string name
--- @treturn Class a new subclass
+-- @tparam string name name of new class
+-- @treturn Class a new class
+_M.__call = class
+
+--- Get class metatable
+-- @usage
+-- (#SubClass).super
+-- @function __len
+_M.__len = getmetatable
 
 --- Partial ordering of subclasses.
--- @function __le
 -- @tparam Class other
--- @treturn boolean true iff 'other' inherits from 'self'
+-- @treturn boolean 'other' inherits from 'self'
+function _M:__le(other)
+    return self == other
+        or type(getmetatable(other)) == "table" and
+           self <= getmetatable(other).__index
+end
 
 return M

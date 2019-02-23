@@ -1,6 +1,6 @@
 local Object = require'lucy.object'
 local Graph = require'lucy.graph'
-local Vertex = Object'Vertex'..Graph
+local Vertex = Object'Vertex'+Graph
 
 describe("an Object with Graph mixin",function()
     it("can add an edge between two vertices",

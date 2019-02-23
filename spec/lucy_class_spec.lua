@@ -1,6 +1,6 @@
 local Class = require'lucy.class'
 
-describe("a lucy Class", function()
+describe("a class", function()
     it("can not create an instance",
     function()
         assert.has.error(function() Class{} end)
@@ -20,28 +20,11 @@ describe("a lucy Class", function()
     it("requires a subclass name when called",
     function()
         assert.has.error(function() Class() end,
-            "Argument must be a subclass name or instance table")
-    end)
-
-    it("requires a mixin to be callable",
-    function()
-        assert.has.error(function() return Class'Sub'..{} end,
-            "Mixin must be callable")
+            "Invalid argument type, nil")
     end)
 
     it("has a string representation",
     function()
         assert.is.equal(tostring(Class), "Class")
-    end)
-
-    it("can find super class version of methods",
-    function()
-        local Sub = Class'Sub'
-        function Sub:value() end
-        local SubUb = Sub'SubUb'
-        SubUb._value = SubUb:super'value'
-        function SubUb:value(x) end
-        assert.is_not.equal(Sub.value,SubUb.value)
-        assert.is.equal(Sub.value,SubUb._value)
     end)
 end)

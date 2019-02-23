@@ -8,20 +8,13 @@
 -- Set{1,2} == Set{2,1}     => true
 -- Set{1,2} <= Set{1,2,3}   => true
 -- Set{1,2} <= Set{2,3}     => false
+-- @see Object
 
-local setmetatable = setmetatable
+local setmetatable,type = setmetatable,type
 local ipairs,rawset = ipairs,rawset
 local Object = require'lucy.object'
-local M = Object'Set'
+local M,_M = Object'Set'
 _ENV=M
-
-local _instance = Object.instance
-function M:instance(l)
-    local I = _instance(self,{})
-    I.__values = setmetatable({},{__mode="k"})
-    for _,v in ipairs(l) do I:insert(v) end
-    return I
-end
 
 --- Add an element to the set
 -- @param elem anything
@@ -97,6 +90,17 @@ function M:__sub(other)
         if not other:include(v) then new:insert(v) end
     end
     return new
+end
+
+function _M:__call(l)
+    if type(l) == "table" then
+        local I = (#Object).__call(self,{})
+        I.__values = setmetatable({},{__mode="k"})
+        for _,v in ipairs(l) do I:insert(v) end
+        return I
+    else
+        return (#Object).__call(self,l)
+    end
 end
 
 return M

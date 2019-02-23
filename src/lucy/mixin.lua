@@ -1,42 +1,44 @@
 --- Base class for mixins.
 -- @classmod Mixin
--- @alias Meta
 -- @usage
 -- Object = require'lucy.object'
 -- Mixin = require'lucy.mixin'
 -- MyMixin = Mixin'MyMixin'
--- MyObject = Object'MyObject'..MyMixin
--- @see Object
+-- MyObject = Object'MyObject'+MyMixin
 -- @see Class
-local getmetatable,setmetatable = getmetatable,setmetatable
+-- @see Object
+
+local getmetatable,setmetatable,type = getmetatable,setmetatable,type
 local error,pairs,rawget,rawset = error,pairs,rawget,rawset
 local format = string.format
-local subclass = require'lucy'.subclass
-local M, _M = subclass(nil,"Mixin")
+local Class = require'lucy.class'
+local M,_M = Class'mixin'
 _ENV=M
 
---- Create a mixin subclass
-function M:subclass(name)
-    local T,mt = subclass(self,name)
-    mt.__mod = _M.__mod
-    return T,mt
-end
+--- Class metamethods
+-- @section
 
---- Initialize an instance of a mixin
-function M:instance(I)
-    local mt = getmetatable(self)
-    mt.instances = mt.instances or setmetatable({},{__mode="k"})
-    mt.instances[I] = true
+--- Instantiate mixin in receiver.
+-- @usage
+-- TheClass+SomeMixin
+-- @tparam Mixin mixin the mixin
+-- @treturn Class the instance class
+function _M:__add(mixin)
+    local mt = #mixin
+    if not rawget(mt,"instances") then
+        rawset(mt,"instances",setmetatable({},{__mode="k"}))
+    end
+    mt.instances[self] = true
 
-    for k,v in pairs(self) do
-        if not rawget(I,k) then
-            rawset(I,k,v)
+    for k,v in pairs(mixin) do
+        if not rawget(self,k) then
+            rawset(self,k,v)
         else
-            error(format("%s: %s.%s already defined",self,I,k))
+            error(format("%s: %s.%s already defined",mixin,self,k))
         end
     end
 
-    return I
+    return self
 end
 
 --- Filter a mixin, renaming methods to enable overrides.
@@ -55,18 +57,13 @@ function _M:__mod(map)
     return new
 end
 
---- Create a new subclass or instance.
--- @function __call
--- @usage
--- SomeMixin(TheClass) <=> TheClass..SomeMixin
--- @see Class:__concat
--- @tparam string|Class name or instance class
--- @treturn Object a new subclass or the instance class
-
 --- Partial ordering of subclasses and instances.
--- @function __le
 -- @tparam Object other
--- @treturn boolean true iff 'other' inherits from 'self'
-
+-- @treturn boolean 'other' is an instance of or inherits from 'self'
+function _M:__le(other)
+    local instances = rawget(#self,"instances")
+    return instances and instances[other]
+        or (#Class).__le(self,other)
+end
 
 return M

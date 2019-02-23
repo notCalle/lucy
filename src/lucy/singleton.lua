@@ -3,7 +3,7 @@
 -- @usage
 -- Object = require'lucy.object'
 -- Singleton = require'lucy.singleton'
--- MyObj = Object'MyObj'..Singleton
+-- MyObj = Object'MyObj'+Singleton
 -- MyObj{} == MyObj{}
 -- @see Mixin
 -- @see Object

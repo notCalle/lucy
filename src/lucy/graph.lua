@@ -1,7 +1,7 @@
 --- Basic directed graph mixin, with no edge restrictions
 -- @classmod Graph
 -- @usage
--- MyGraph=Object("MyGraph",Graph)
+-- MyGraph=Object'MyGraph'+Graph
 --
 -- v1 = MyGraph{}             (v1)
 -- v2 = MyGraph{}^v1          (v2)->(v1)
@@ -23,6 +23,8 @@ local function add_edge(head,tail)
     if _ENV <= head and _ENV <= tail then
         _tails[head] = _tails[head] or setmetatable({},{__mode="v"})
         _heads[tail] = _heads[tail] or setmetatable({},{__mode="v"})
+        if type(head.__edge_to) == "function" then head:__edge_to(tail) end
+        if type(tail.__edge_from) == "function" then tail:__edge_from(head) end
         insert(_tails[head],tail)
         insert(_heads[tail],head)
     else

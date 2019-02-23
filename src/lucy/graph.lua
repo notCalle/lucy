@@ -7,6 +7,8 @@
 -- v2 = MyGraph{}^v1          (v2)->(v1)
 -- v3 = MyGraph{}^{v1,v2}     (v3)->(v2)->(v1)
 --                                `--------^
+-- @see Object
+
 local getmetatable,setmetatable = getmetatable,setmetatable
 local insert = table.insert
 local error,ipairs,next,type = error,ipairs,next,type
@@ -32,15 +34,16 @@ local function add_edge(head,tail)
     end
 end
 
---- Add an edge to vertices
+--- Add an edge between vertices.
 -- Either head or tail, but not both may be a table of Graph objects.
 -- In that case edges are added to/from all objects in the table.
+--
 -- N.B! call signature is actually Graph.__pow(head,tail), but ldoc.
 -- @usage
--- {v1,v2}^v3  <=> v1^v3 ; v2^v3
--- @tparam Graph|table head
--- @tparam Graph|table tail
--- @treturn Graph|table head for method chaining
+-- v1^{v2,v3}^v4  <=>  v1^v2 ; v1^v3 ; v2^v4 ; v3^v4
+-- @tparam Graph|{Graph,...} head
+-- @tparam Graph|{Graph,...} tail
+-- @treturn Graph|{Graph,...} head for method chaining
 function M.__pow(head,tail)
     if type(head) ~= "table" or type(tail) ~= "table" then
         error("Edges must be between tables of/or graph vertices",2)
@@ -55,12 +58,13 @@ function M.__pow(head,tail)
 end
 
 --- Return the list of tails for outgoing edges
+-- @treturn {Graph,...}
 function M:tails()
     return _tails[self] or {}
 end
 
 --- Return the list of heads for incoming edges
--- @treturn {Graph}
+-- @treturn {Graph,...}
 function M:heads()
     return _heads[self] or {}
 end
@@ -97,7 +101,7 @@ end
 
 --- Return an iterator function that walks the edges of a graph, depth first
 -- @tparam ?func select function that selects edges to walk
--- @treturn func'for' loop iterator
+-- @treturn func 'for' loop iterator
 -- @see edges_bfs
 function M:edges_dfs(select)
     local q = Queue{}

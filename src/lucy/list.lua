@@ -1,5 +1,6 @@
 --- Basic list class, including all methods from table.
 -- @classmod List
+-- @see Object
 -- @see table
 
 local Object = require'lucy.object'

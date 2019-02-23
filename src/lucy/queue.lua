@@ -6,6 +6,7 @@
 -- q:push(1) q:push(2) q:push(3)
 -- 1 == q:pull()
 -- 3 == q:pop()
+-- @see List
 
 local error = error
 local List = require'lucy.list'

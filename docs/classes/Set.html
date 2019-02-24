@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Metamethods">Metamethods</a></li>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Class.html">Class</a></li>
+  <li><a href="../classes/Graph.html">Graph</a></li>
+  <li><a href="../classes/List.html">List</a></li>
+  <li><a href="../classes/Mixin.html">Mixin</a></li>
+  <li><a href="../classes/Object.html">Object</a></li>
+  <li><a href="../classes/Queue.html">Queue</a></li>
+  <li><strong>Set</strong></li>
+  <li><a href="../classes/Singleton.html">Singleton</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/lucy.html">lucy</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Set</code></h1>
+<p>Basic set class with boolean operations and partial ordering.</p>
+<p></p>
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/Object.html#">Object</a>
+    </ul>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">Set{1,2} &amp; Set{2,3}      =&gt; Set{2}
+Set{1,2} | Set{2,3}      =&gt; Set{1,2,3}
+Set{1,2} - Set{2,3}      =&gt; Set{1}
+Set{1,2} ~ Set{2,3}      =&gt; Set{1,3}
+Set{1,2} == Set{2,1}     =&gt; true
+Set{1,2} &lt;= Set{1,2,3}   =&gt; true
+Set{1,2} &lt;= Set{2,3}     =&gt; false
+</pre>
+    </ul>
+
+
+<h2><a href="#Metamethods">Metamethods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Set:__eq">Set:__eq (other)</a></td>
+	<td class="summary">Set equality over included elements.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Set:__le">Set:__le (other)</a></td>
+	<td class="summary">Set partial ordering over subsets.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Set:__bor">Set:__bor (other)</a></td>
+	<td class="summary">Set union operation.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Set:__band">Set:__band (other)</a></td>
+	<td class="summary">Set intersection operation.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Set:__bxor">Set:__bxor (other)</a></td>
+	<td class="summary">Set symmetric difference.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Set:__sub">Set:__sub (other)</a></td>
+	<td class="summary">Set difference operation.</td>
+	</tr>
+</table>
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Set:insert">Set:insert (elem)</a></td>
+	<td class="summary">Add an element to the set</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Set:include">Set:include (elem)</a></td>
+	<td class="summary">Test if an element is in the set.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Metamethods"></a>Metamethods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Set:__eq"></a>
+    <strong>Set:__eq (other)</strong>
+    </dt>
+    <dd>
+    Set equality over included elements.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">other</span>
+            <span class="types"><a class="type" href="../classes/Set.html#">Set</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         candidate for testing
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Set:__le"></a>
+    <strong>Set:__le (other)</strong>
+    </dt>
+    <dd>
+    Set partial ordering over subsets.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">other</span>
+            <span class="types"><a class="type" href="../classes/Set.html#">Set</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         candidate for testing
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Set:__bor"></a>
+    <strong>Set:__bor (other)</strong>
+    </dt>
+    <dd>
+    Set union operation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">other</span>
+            <span class="types"><a class="type" href="../classes/Set.html#">Set</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Set.html#">Set</a></span>
+        all elements in either set
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Set:__band"></a>
+    <strong>Set:__band (other)</strong>
+    </dt>
+    <dd>
+    Set intersection operation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">other</span>
+            <span class="types"><a class="type" href="../classes/Set.html#">Set</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Set.html#">Set</a></span>
+        elements present in both sets
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Set:__bxor"></a>
+    <strong>Set:__bxor (other)</strong>
+    </dt>
+    <dd>
+    Set symmetric difference.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">other</span>
+            <span class="types"><a class="type" href="../classes/Set.html#">Set</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Set.html#">Set</a></span>
+        elements exclusive to one of the sets
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Set:__sub"></a>
+    <strong>Set:__sub (other)</strong>
+    </dt>
+    <dd>
+    Set difference operation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">other</span>
+            <span class="types"><a class="type" href="../classes/Set.html#">Set</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Set.html#">Set</a></span>
+        elements present in self but not other
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Set:insert"></a>
+    <strong>Set:insert (elem)</strong>
+    </dt>
+    <dd>
+    Add an element to the set
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">elem</span>
+         anything
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Set:include"></a>
+    <strong>Set:include (elem)</strong>
+    </dt>
+    <dd>
+    Test if an element is in the set.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">elem</span>
+         anything
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2019-02-24 14:09:39 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

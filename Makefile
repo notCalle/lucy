@@ -9,14 +9,14 @@ coverage:
 	luacov
 	@awk '(S==0){}/^Summary/{S=1}(S==1){print}' < luacov.report.out
 
-.PHONY: doc
-doc:
-	ldoc src
+.PHONY: docs
+docs:
+	ldoc -d docs src
 
 .PHONY: clean
 clean:
 	-rm luacov.*.out
 
 .PHONY: rocks
-rocks: clean coverage doc
+rocks: clean coverage docs
 	luarocks make rockspecs/lucy-scm-1.rockspec

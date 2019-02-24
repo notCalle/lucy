@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Metamethods">Metamethods</a></li>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Class.html">Class</a></li>
+  <li><strong>Graph</strong></li>
+  <li><a href="../classes/List.html">List</a></li>
+  <li><a href="../classes/Mixin.html">Mixin</a></li>
+  <li><a href="../classes/Object.html">Object</a></li>
+  <li><a href="../classes/Queue.html">Queue</a></li>
+  <li><a href="../classes/Set.html">Set</a></li>
+  <li><a href="../classes/Singleton.html">Singleton</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/lucy.html">lucy</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Graph</code></h1>
+<p>Basic directed graph mixin, with no edge restrictions</p>
+<p></p>
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/Object.html#">Object</a>
+    </ul>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">MyGraph=Object&apos;MyGraph&apos;+Graph
+
+v1 = MyGraph{}             (v1)
+v2 = MyGraph{}^v1          (v2)-&gt;(v1)
+v3 = MyGraph{}^{v1,v2}     (v3)-&gt;(v2)-&gt;(v1)
+                               `--------^
+</pre>
+    </ul>
+
+
+<h2><a href="#Metamethods">Metamethods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Graph:__pow">Graph:__pow (head, tail)</a></td>
+	<td class="summary">Add an edge between vertices.</td>
+	</tr>
+</table>
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Graph:tails">Graph:tails ()</a></td>
+	<td class="summary">Return the list of tails for outgoing edges</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Graph:heads">Graph:heads ()</a></td>
+	<td class="summary">Return the list of heads for incoming edges</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Graph:edges_bfs">Graph:edges_bfs (select)</a></td>
+	<td class="summary">Return an iterator function that walks the edges of a graph, breadth first
+<p> If called with a function, that function must return truthy for an edge to
+ be walked, for example to detect loops and avoid infinite iteration, or
+ implementing a state machine.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Graph:edges_dfs">Graph:edges_dfs (select)</a></td>
+	<td class="summary">Return an iterator function that walks the edges of a graph, depth first</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Metamethods"></a>Metamethods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Graph:__pow"></a>
+    <strong>Graph:__pow (head, tail)</strong>
+    </dt>
+    <dd>
+    Add an edge between vertices.
+ Either head or tail, but not both may be a table of Graph objects.
+ In that case edges are added to/from all objects in the table.
+<p> N.B! call signature is actually Graph.__pow(head,tail), but ldoc.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">head</span>
+            <span class="types"><a class="type" href="../classes/Graph.html#">Graph</a> or <a class="type" href="../classes/Graph.html#">{Graph,...}</a></span>
+
+        </li>
+        <li><span class="parameter">tail</span>
+            <span class="types"><a class="type" href="../classes/Graph.html#">Graph</a> or <a class="type" href="../classes/Graph.html#">{Graph,...}</a></span>
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Graph.html#">Graph</a> or <a class="type" href="../classes/Graph.html#">{Graph,...}</a></span>
+        head for method chaining
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">v1^{v2,v3}^v4  &lt;=&gt;  v1^v2 ; v1^v3 ; v2^v4 ; v3^v4</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Graph:tails"></a>
+    <strong>Graph:tails ()</strong>
+    </dt>
+    <dd>
+    Return the list of tails for outgoing edges
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Graph.html#">{Graph,...}</a></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Graph:heads"></a>
+    <strong>Graph:heads ()</strong>
+    </dt>
+    <dd>
+    Return the list of heads for incoming edges
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Graph.html#">{Graph,...}</a></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Graph:edges_bfs"></a>
+    <strong>Graph:edges_bfs (select)</strong>
+    </dt>
+    <dd>
+    Return an iterator function that walks the edges of a graph, breadth first
+<p> If called with a function, that function must return truthy for an edge to
+ be walked, for example to detect loops and avoid infinite iteration, or
+ implementing a state machine.
+<p> The iterator yields two values: head,tail for the next selected edge.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">select</span>
+            <span class="types">optional <span class="type">func</span></span>
+         function that selects edges to walk
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">func</span></span>
+        'for' loop iterator
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Graph:edges_dfs"></a>
+    <strong>Graph:edges_dfs (select)</strong>
+    </dt>
+    <dd>
+    Return an iterator function that walks the edges of a graph, depth first
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">select</span>
+            <span class="types">optional <span class="type">func</span></span>
+         function that selects edges to walk
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">func</span></span>
+        'for' loop iterator
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/Graph.html#Graph:edges_bfs">edges_bfs</a>
+    </ul>
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2019-02-28 00:01:28 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -41,6 +41,23 @@ function _M:__add(mixin)
     return self
 end
 
+--- Merge mixin into receiver.
+-- @usage
+-- MyMixin = Mixin'MyMixin'|OtherMixin
+-- @tparam Mixin other the mixin
+-- @treturn Mixin self
+function _M:__bor(other)
+    for k,v in pairs(other) do
+        if not rawget(self,k) then
+            rawset(self,k,v)
+        else
+            error(format("%s: %s.%s already defined",mixin,self,k))
+        end
+    end
+
+    return self
+end
+
 --- Filter a mixin, renaming methods to enable overrides.
 -- If a method is renamed to something falsey, it is not included
 -- @tparam table map {[string]=string,...} table of method name mappings

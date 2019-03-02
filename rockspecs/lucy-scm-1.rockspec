@@ -20,12 +20,14 @@ build = {
     modules = {
         lucy = "src/lucy.lua",
         ["lucy.class"] = "src/lucy/class.lua",
+        ["lucy.dag"] = "src/lucy/dag.lua",
         ["lucy.list"] = "src/lucy/list.lua",
         ["lucy.graph"] = "src/lucy/graph.lua",
         ["lucy.mixin"] = "src/lucy/mixin.lua",
         ["lucy.object"] = "src/lucy/object.lua",
         ["lucy.queue"] = "src/lucy/queue.lua",
         ["lucy.set"] = "src/lucy/set.lua",
-        ["lucy.singleton"] = "src/lucy/singleton.lua"
+        ["lucy.singleton"] = "src/lucy/singleton.lua",
+        ["lucy.tree"] = "src/lucy/tree.lua",
     }
 }

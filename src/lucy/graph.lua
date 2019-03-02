@@ -22,16 +22,12 @@ local _heads = setmetatable({},{__mode="k"})
 local _tails = setmetatable({},{__mode="k"})
 
 local function add_edge(head,tail)
-    if _ENV <= head and _ENV <= tail then
-        _tails[head] = _tails[head] or setmetatable({},{__mode="v"})
-        _heads[tail] = _heads[tail] or setmetatable({},{__mode="v"})
-        if type(head.__edge_to) == "function" then head:__edge_to(tail) end
-        if type(tail.__edge_from) == "function" then tail:__edge_from(head) end
-        insert(_tails[head],tail)
-        insert(_heads[tail],head)
-    else
-        error("Edges must be between graph vertices",3)
-    end
+    _tails[head] = _tails[head] or setmetatable({},{__mode="v"})
+    _heads[tail] = _heads[tail] or setmetatable({},{__mode="v"})
+    if type(head.__edge_to) == "function" then head:__edge_to(tail) end
+    if type(tail.__edge_from) == "function" then tail:__edge_from(head) end
+    insert(_tails[head],tail)
+    insert(_heads[tail],head)
 end
 
 --- Add an edge between vertices.

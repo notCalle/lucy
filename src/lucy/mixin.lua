@@ -38,7 +38,7 @@ function _M:__add(mixin)
         end
     end
 
-    return self
+    return self,#self
 end
 
 --- Merge mixin into receiver.

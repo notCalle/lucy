@@ -21,6 +21,7 @@ build = {
         lucy = "src/lucy.lua",
         ["lucy.class"] = "src/lucy/class.lua",
         ["lucy.dag"] = "src/lucy/dag.lua",
+        ["lucy.event"] = "src/lucy/event.lua",
         ["lucy.list"] = "src/lucy/list.lua",
         ["lucy.graph"] = "src/lucy/graph.lua",
         ["lucy.mixin"] = "src/lucy/mixin.lua",
